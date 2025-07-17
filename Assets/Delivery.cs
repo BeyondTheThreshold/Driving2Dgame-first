@@ -3,6 +3,7 @@ using UnityEngine;
 public class Delivery : MonoBehaviour
 {
     bool hasPackage;
+    [SerializeField] int apple = 0;
     [SerializeField] Color32 hasPackageColor = new Color32(1, 1, 1, 1); //hasPackageColor은 구조체이다 구조체의 자료형이 Color32이다
     [SerializeField] Color32 noPackageColor = new Color32(1, 1, 1, 1);
 
@@ -23,7 +24,8 @@ public class Delivery : MonoBehaviour
 
         if (other.tag == "TrigerPoint" && !hasPackage)
         {
-            Debug.Log("배달물 수화");
+            apple++;
+            Debug.Log("배달물 수화 사과갯수" + apple);
             hasPackage = true;
             spriteRenderer.color = hasPackageColor;
             Destroy(other.gameObject, destroyDelay);
@@ -35,6 +37,7 @@ public class Delivery : MonoBehaviour
         else if (other.tag == "Customer" && hasPackage)
         {
             Debug.Log("사과배달 1개완료");
+            apple--;
             hasPackage = false;
             spriteRenderer.color = noPackageColor;
         }
